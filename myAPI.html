@@ -1,0 +1,91 @@
+<!DOCTYPEÂ html>
+<html>
+<head>
+      <title>HTML Tutorial</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" type="text/css" href="MZcss.css">
+	  <script src="jquery-3.1.1.min.js"></script>
+	  <script src="myscript.js"></script>
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  
+	  
+<script>
+	   function flickrbutton()
+	  {
+		  $('#images').empty();
+		  
+		  var myvalue = document.getElementById('myvalue').value;
+		  
+	 	searchFlicker(myvalue);
+	
+	  }  
+
+	  function searchFlicker(myvalue) {
+		   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+		       $.getJSON( flickerAPI, {  // The "$" simply refers to jQuery. This calls the getJSON function that is found inside jquery-3.1.1.min.js
+		         tags: myvalue, //Some filter information in the format set by Flickr, who owns the JSON
+		         tagmode: "any",
+		         format: "json"
+		       })
+
+
+		    .done(function(data)
+		   	{ //Here, a an unnamed function is created made into the event handler for the "done" event... in other words, this is the code that will manifest itself when the getJSON is done.
+		           $.each( data.items, function( i, item ) {
+		             $("<img>").attr( "src", item.media.m ).appendTo( "#images" );
+
+		         });
+		       });
+		
+	  }
+
+	  
+
+
+
+</script>
+	  
+		
+</head>
+
+<body>
+	
+		<div class"top">
+	
+		<div class="icons">
+	                <a href="https://www.linkedin.com/in/meilan1/" target="_blank"><i class="fa fa-linkedin-square" style="font-size:25px"></i></a>		
+	                <a href="https://www.facebook.com/meilan.zheng.12" target="_blank"><i class="fa fa-facebook-square" style="font-size:25px"></i></a>		
+			<a href="https://twitter.com/MZL4074" target="_blank"> <i class="fa fa-tumblr" style="font-size:25px"></i></a>
+			<a href="https://www.pinterest.com/meilanzheng12/" target="_blank"><i class="fa fa-pinterest" style="font-size:25px"></i></a>
+	               <a href="https://www.instagram.com/lina_zheng87/?hl=en" target="_blank"><i class="fa fa-instagram" style="font-size:25px"></i></a>
+		</div>
+	
+		<h1><span style="color:#676666">Meilan Zheng</span></h1>
+	
+		<ul>
+		  <li><a href="index.html">Home</a></li>
+		  <li><a href="myAPI.html">My API</a></li>
+		  <li><a href="#contact">My Courses</a></li>
+		  <li><a href="#about">My Community</a></li>
+		</ul>
+
+	</div>
+	
+<div class="main">
+	  <br>
+	  <div class="search" align="center">
+		  <input id="myvalue" type="text" name="fname"  placeholder="What would you like to search on Flickr"><br><br>
+	  <input type="submit" value="Search Flickr" onclick="flickrbutton()">
+  </div>
+	
+	<div id="images"> </div>
+	
+</div>
+	
+<div class="footer" style="background-color:#e5e6eb; height:50px;">
+	Posted by:Meilan Zheng<br>
+	Contact information:<a href="mailto:meilan.zheng@baruchmail.cuny.edu">meilan.zheng@baruchmail.cuny.edu</a>.
+</div>
+	
+</body>
+</html>
